@@ -2,6 +2,8 @@ import { getLowercaseLettersIfChecked } from '../checkboxes/lowercase';
 import { getUppercaseLettersIfChecked } from '../checkboxes/uppercase';
 import { getNumbersIfChecked } from '../checkboxes/numbers';
 import { getSymbolsIfChecked } from '../checkboxes/symbols';
+import { getHiraganaIfChecked } from '../checkboxes/hiragana';
+import { getKatakanaIfChecked } from '../checkboxes/katakana';
 
 export function htmlGenerate() {
   return `
@@ -17,18 +19,22 @@ export function setupGenerateButton(lengthId) {
     const uppercase = getUppercaseLettersIfChecked();
     const numbers = getNumbersIfChecked();
     const symbols = getSymbolsIfChecked();
+    const hiragana = getHiraganaIfChecked();
+    const katakana = getKatakanaIfChecked();
 
-    const password = generatePassword(length, lowercase, uppercase, numbers, symbols);
+    const password = generatePassword(length, lowercase, uppercase, numbers, symbols, hiragana, katakana);
     document.querySelector('#password').textContent = password;
   });
 }
 
-function generatePassword(length, lowercase, uppercase, numbers, symbols) {
+function generatePassword(length, lowercase, uppercase, numbers, symbols, hiragana, katakana) {
   const characterSets = [];
   if (lowercase) characterSets.push(lowercase);
   if (uppercase) characterSets.push(uppercase);
   if (numbers) characterSets.push(numbers);
   if (symbols) characterSets.push(symbols);
+  if (hiragana) characterSets.push(hiragana);
+  if (katakana) characterSets.push(katakana);
 
   if (characterSets.length === 0) {
     return '';

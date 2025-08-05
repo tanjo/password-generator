@@ -5,6 +5,8 @@ import { htmlUppercase } from './checkboxes/uppercase'
 import { htmlNumbers } from './checkboxes/numbers'
 import { htmlSymbols } from './checkboxes/symbols'
 import { htmlCopy, setupCopyButton } from './buttons/copy'
+import { htmlHiragana } from './checkboxes/hiragana'
+import { htmlKatakana } from './checkboxes/katakana'
 
 document.querySelector('#app').innerHTML = `
   <div>
@@ -12,13 +14,15 @@ document.querySelector('#app').innerHTML = `
     <div id="length-container">
       <label for="length">パスワードの長さ:</label>
       <input type="range" id="length" value="12" min="4" max="64">
-      <span id="length-value">12</span>
+      <span id="length-value" contenteditable="true">12</span>
     </div>
     <div id="checkboxes">
       ${htmlLowercase()}
       ${htmlUppercase()}
       ${htmlNumbers()}
       ${htmlSymbols()}
+      ${htmlHiragana()}
+      ${htmlKatakana()}
     </div>
     <div id="password"></div>
     ${htmlGenerate()}
@@ -36,3 +40,11 @@ function updateLengthValue() {
 }
 document.querySelector('#length').addEventListener('input', updateLengthValue);
 updateLengthValue(); // 初期値の更新
+
+function updateLengthValueBySpan() {
+  const lengthInput = document.querySelector('#length');
+  const lengthValue = document.querySelector('#length-value');
+  lengthValue.textContent = Math.min(64, Math.max(4, lengthValue.textContent));
+  lengthInput.value = lengthValue.textContent;
+}
+document.querySelector('#length-value').addEventListener('focusout', updateLengthValueBySpan);

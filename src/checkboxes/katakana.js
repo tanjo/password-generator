@@ -5,10 +5,10 @@ export function htmlKatakana() {
   `;
 }
 
-const KATAKANA = 'アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン';
-const HENTAI_KANA = 'ヰヱ';
+const KATAKANA = 'アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲンガギグゲゴザジズゼゾダヂヅデドバビブベボパピプペポ';
+// const HENTAI_KANA = 'ヰヱ';
 
 export function getKatakanaIfChecked() {
   const katakanaCheckbox = document.querySelector('#katakana');
-  return katakanaCheckbox.checked ? KATAKANA + HENTAI_KANA : '';
+  return katakanaCheckbox.checked ? KATAKANA : '';
 }

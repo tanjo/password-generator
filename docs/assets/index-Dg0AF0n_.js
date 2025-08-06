@@ -13,15 +13,15 @@
   `}const C="!@#$%^&*()_+[]{}|;:,.<>?";function v(){return document.querySelector("#symbols").checked?C:""}function L(){return`
       <input type="checkbox" id="hiragana">
       <label for="hiragana">ひらがな</label>
-  `}const q="あいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもやゆよらりるれろわをんがぎぐげござじずぜぞだぢづでどばびぶべぼぱぴぷぺぽ",A="ゐゑ";function E(){return document.querySelector("#hiragana").checked?q+A:""}function w(){return`
+  `}const q="あいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもやゆよらりるれろわをんがぎぐげござじずぜぞだぢづでどばびぶべぼぱぴぷぺぽ";function w(){return document.querySelector("#hiragana").checked?q:""}function E(){return`
       <input type="checkbox" id="katakana">
       <label for="katakana">カタカナ</label>
-  `}const N="アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン",M="ヰヱ";function $(){return document.querySelector("#katakana").checked?N+M:""}function T(){return`
+  `}const M="アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲンガギグゲゴザジズゼゾダヂヅデドバビブベボパピプペポ";function A(){return document.querySelector("#katakana").checked?M:""}function $(){return`
     <button id="generate" type="button">生成</button>
-  `}function I(t){document.querySelector("#generate").addEventListener("click",()=>{const u=parseInt(document.querySelector(t.startsWith("#")?t:`#${t}`).value),r=f(),e=y(),n=S(),a=v(),c=E(),s=$(),l=B(u,r,e,n,a,c,s);document.querySelector("#password").textContent=l})}function B(t,o,u,r,e,n,a){const c=[];if(o&&c.push(o),u&&c.push(u),r&&c.push(r),e&&c.push(e),n&&c.push(n),a&&c.push(a),c.length===0)return"";let s="";for(let l=0;l<t;l++){const i=c[Math.floor(Math.random()*c.length)];s+=i[Math.floor(Math.random()*i.length)]}return s}function O(){return`
+  `}function B(t){document.querySelector("#generate").addEventListener("click",()=>{const u=parseInt(document.querySelector(t.startsWith("#")?t:`#${t}`).value),r=f(),e=y(),n=S(),a=v(),c=w(),s=A(),l=N(u,r,e,n,a,c,s);document.querySelector("#password").textContent=l})}function N(t,o,u,r,e,n,a){const c=[];if(o&&c.push(o),u&&c.push(u),r&&c.push(r),e&&c.push(e),n&&c.push(n),a&&c.push(a),c.length===0)return"";let s="";for(let l=0;l<t;l++){const i=c[Math.floor(Math.random()*c.length)];s+=i[Math.floor(Math.random()*i.length)]}return s}function O(){return`
     <button id="copy" type="button">コピー</button>
     <p id="copy-message" class="hidden">コピーしました！</p>
-  `}function K(t){const o=document.querySelector("#copy"),u=document.querySelector("#copy-message");o.addEventListener("click",()=>{const r=document.querySelector(t.startsWith("#")?t:`#${t}`),e=r?r.textContent:"";!e||e.trim()===""||navigator.clipboard.writeText(e).then(()=>{u.classList.remove("hidden"),setTimeout(()=>{u.classList.add("hidden")},2e3)}).catch(n=>{console.error("コピーに失敗しました:",n)})})}document.querySelector("#app").innerHTML=`
+  `}function T(t){const o=document.querySelector("#copy"),u=document.querySelector("#copy-message");o.addEventListener("click",()=>{const r=document.querySelector(t.startsWith("#")?t:`#${t}`),e=r?r.textContent:"";!e||e.trim()===""||navigator.clipboard.writeText(e).then(()=>{u.classList.remove("hidden"),setTimeout(()=>{u.classList.add("hidden")},2e3)}).catch(n=>{console.error("コピーに失敗しました:",n)})})}document.querySelector("#app").innerHTML=`
   <div>
     <h1>パスワード生成器</h1>
     <div id="length-container">
@@ -35,10 +35,10 @@
       ${g()}
       ${x()}
       ${L()}
-      ${w()}
+      ${E()}
     </div>
     <div id="password"></div>
-    ${T()}
+    ${$()}
     ${O()}
   </div>
-`;K("#password");I("#length");function d(){const t=document.querySelector("#length"),o=document.querySelector("#length-value");o.textContent=t.value}document.querySelector("#length").addEventListener("input",d);d();function P(){const t=document.querySelector("#length"),o=document.querySelector("#length-value");o.textContent=Math.min(64,Math.max(4,o.textContent)),t.value=o.textContent}document.querySelector("#length-value").addEventListener("focusout",P);
+`;T("#password");B("#length");function d(){const t=document.querySelector("#length"),o=document.querySelector("#length-value");o.textContent=t.value}document.querySelector("#length").addEventListener("input",d);d();function I(){const t=document.querySelector("#length"),o=document.querySelector("#length-value");o.textContent=Math.min(64,Math.max(4,o.textContent)),t.value=o.textContent}document.querySelector("#length-value").addEventListener("focusout",I);

@@ -217,6 +217,9 @@ h1 {
 }
 
 #length-value {
+  width: 72px;
+  appearance: textfield;
+  -moz-appearance: textfield;
   font-size: 1.25rem;
   font-weight: var(--font-weight-semibold);
   color: var(--color-primary);
@@ -226,6 +229,12 @@ h1 {
   border: 2px solid var(--color-border);
   min-width: 60px;
   text-align: center;
+}
+
+#length-value::-webkit-inner-spin-button,
+#length-value::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 
 #checkboxes {
@@ -286,6 +295,56 @@ input[type="checkbox"] {
   box-shadow: var(--shadow-lg);
 }
 
+#symbol-options {
+  display: none;
+  width: 100%;
+  min-width: 0;
+  margin: 0 0 var(--spacing-xl);
+  padding: 0;
+  border: 0;
+}
+
+#checkboxes:has(#symbols:checked) + #symbol-options {
+  display: block;
+}
+
+#symbol-options .symbol-list {
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--spacing-xs);
+  display: flex;
+}
+
+#symbol-options .symbol-list label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  min-width: 2.5rem;
+  padding: var(--spacing-xs);
+  border: 2px solid var(--color-success);
+  border-radius: var(--radius-md);
+  color: var(--color-success);
+  background: transparent;
+  font-family: monospace;
+  font-size: 1rem;
+  transition: all var(--transition-fast);
+}
+
+#symbol-options .symbol-list label:hover {
+  border-color: var(--color-success-hover);
+  color: var(--color-success-hover);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+#symbol-options .symbol-list input[type="checkbox"]:checked + label {
+  background: linear-gradient(135deg, var(--color-success), var(--color-success-hover));
+  color: white;
+  border-color: var(--color-success);
+  box-shadow: var(--shadow-lg);
+}
+
 button {
   border-radius: var(--radius-md);
   border: 2px solid transparent;
@@ -298,6 +357,13 @@ button {
   position: relative;
   overflow: hidden;
   min-width: 120px;
+}
+
+#checkboxes label,
+#symbol-options .symbol-list label,
+button {
+  -webkit-user-select: none;
+  user-select: none;
 }
 
 button::before {
@@ -382,6 +448,33 @@ button#copy:hover {
   bottom: 0;
   background: linear-gradient(45deg, transparent 30%, rgba(100, 108, 255, 0.05) 50%, transparent 70%);
   animation: shimmer 2s infinite;
+}
+
+#percent-escaped-output {
+  display: none;
+  margin: calc(-1 * var(--spacing-md)) 0 var(--spacing-lg);
+  text-align: left;
+}
+
+#percent-escaped-output.visible {
+  display: block;
+}
+
+.percent-escaped-label {
+  margin-bottom: var(--spacing-xs);
+  color: var(--color-text-secondary);
+  font-size: 0.875rem;
+  font-weight: var(--font-weight-medium);
+}
+
+#percent-escaped-password {
+  padding: var(--spacing-md);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-card);
+  color: var(--color-text-primary);
+  font-family: 'JetBrains Mono', 'Fira Code', 'Monaco', 'Consolas', monospace;
+  overflow-wrap: anywhere;
 }
 
 @keyframes shimmer {

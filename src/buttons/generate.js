@@ -13,6 +13,21 @@ export function htmlGenerate() {
 
 export function setupGenerateButton(lengthId) {
   const generateButton = document.querySelector('#generate');
+  const percentEscapedOutput = document.querySelector('#percent-escaped-output');
+  const percentEscapedPassword = document.querySelector('#percent-escaped-password');
+
+  const updatePercentEscapedOutput = () => {
+    const password = document.querySelector('#password').textContent;
+    const hasKanaSelected = getHiraganaIfChecked() || getKatakanaIfChecked();
+    const shouldShow = hasKanaSelected && password;
+
+    percentEscapedOutput.classList.toggle('visible', Boolean(shouldShow));
+    percentEscapedPassword.textContent = shouldShow ? encodeURIComponent(password) : '';
+  };
+
+  document.querySelector('#hiragana').addEventListener('change', updatePercentEscapedOutput);
+  document.querySelector('#katakana').addEventListener('change', updatePercentEscapedOutput);
+
   generateButton.addEventListener('click', () => {
     const length = parseInt(document.querySelector(lengthId.startsWith('#') ? lengthId : `#${lengthId}`).value);
     const lowercase = getLowercaseLettersIfChecked();
@@ -24,6 +39,7 @@ export function setupGenerateButton(lengthId) {
 
     const password = generatePassword(length, lowercase, uppercase, numbers, symbols, hiragana, katakana);
     document.querySelector('#password').textContent = password;
+    updatePercentEscapedOutput();
   });
 }
 

@@ -58,9 +58,21 @@ function generatePassword(length, lowercase, uppercase, numbers, symbols, hiraga
 
   let password = '';
   for (let i = 0; i < length; i++) {
-    const randomSet = characterSets[Math.floor(Math.random() * characterSets.length)];
-    password += randomSet[Math.floor(Math.random() * randomSet.length)];
+    const randomSet = characterSets[getSecureRandomIndex(characterSets.length)];
+    password += randomSet[getSecureRandomIndex(randomSet.length)];
   }
   
   return password;
+}
+
+function getSecureRandomIndex(maxExclusive) {
+  const uint32Range = 0x100000000;
+  const rejectionLimit = Math.floor(uint32Range / maxExclusive) * maxExclusive;
+  const randomValues = new Uint32Array(1);
+
+  do {
+    globalThis.crypto.getRandomValues(randomValues);
+  } while (randomValues[0] >= rejectionLimit);
+
+  return randomValues[0] % maxExclusive;
 }
